@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <style>
+            body {
+                background-color: #e6d8e7;
+                background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239800a1' fill-opacity='0.22'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+                display: flex;
+                flex-direction: column;
+                height: 90vh;
+                align-items: center;
+                justify-content: center;
+            }
+            button {
+                background: linear-gradient(
+                    90deg,
+                    rgba(128, 0, 128, 0.299),
+                    rgba(210, 105, 30, 0.39),
+                    rgba(0, 255, 255, 0.303)
+                );
+                height: 40px;
+                width: 250px;
+                border: none;
+                margin-top: 20px;
+                padding: 10px;
+                border-radius: 13px;
+            }
+            button:hover {
+                cursor: pointer;
+                color: white;
+                background: linear-gradient(
+                    90deg,
+                    rgba(128, 0, 128, 0.478),
+                    rgba(210, 105, 30, 0.434),
+                    rgba(0, 255, 255, 0.471)
+                );
+            }
+            input {
+                width: 200px;
+                height: 40px;
+                border: none;
+                border-radius: 5px;
+                text-align: left;
+                padding-left: 10px;
+                margin-bottom: 20px;
+                color: rgba(128, 128, 128, 0.414);
+            }
+            input:hover {
+                background-color: rgba(128, 128, 128, 0.203);
+                color: white;
+            }
+        </style>
+        <input type="text" placeholder="Search" />
+        <img src="" alt="" />
+        <button>search</button>
+        <script>
+            const img = document.querySelector("img");
+            const input = document.querySelector("input");
+            const btn = document.querySelector("button");
+            
+            btn.addEventListener("click", () => {
+                const term = input.value;
+                fetch(
+                    `https://api.giphy.com/v1/gifs/translate?api_key=204j39VeGV2mxbeQCx8sQt36iK4Ta6hx&s=${term}`,
+                    { mode: "cors" }
+                )
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (response) {
+                        img.src = response.data.images.original.url;
+                    });
+            });
+        </script>
+    </body>
+</html>
